@@ -1,0 +1,52 @@
+{
+    "name": "ez-php/webauthn-metadata",
+    "version": "2.4.8",
+    "description": "FIDO MDS trust-anchor lookups for WebAuthn: metadata blob download, JWT verification, trust-anchor cache and attestation chain trust decisions",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Uretschnig",
+            "email": "andreas.uretschnig@gmail.com"
+        }
+    ],
+    "keywords": ["webauthn", "fido2", "fido-mds", "metadata", "attestation", "php", "ez-php"],
+    "homepage": "https://github.com/ez-php/webauthn-metadata",
+    "support": {
+        "issues": "https://github.com/ez-php/webauthn-metadata/issues",
+        "source": "https://github.com/ez-php/webauthn-metadata"
+    },
+    "require": {
+        "php": "^8.5",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-openssl": "*"
+    },
+    "suggest": {
+        "ez-php/webauthn": "Produces the attestation statements (x5c chain, AAGUID) this module evaluates against FIDO MDS"
+    },
+    "require-dev": {
+        "ez-php/docker": "^2.0",
+        "phpunit/phpunit": "^13.0",
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.94",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "EzPhp\\WebauthnMetadata\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs": "php-cs-fixer fix",
+        "analyse": "phpstan analyse",
+        "test": "phpunit",
+        "full": "composer analyse && composer cs && composer test"
+    }
+}
