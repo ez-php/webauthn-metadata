@@ -31,7 +31,7 @@ final class CertificateChain
 
         foreach ($chainDer as $index => $der) {
             // Malformed input is an expected outcome here (returns false), not a warning.
-            $certificate = @openssl_x509_read(self::derToPem($der));
+            $certificate = self::readCertificate(self::derToPem($der));
 
             if ($certificate === false) {
                 return false;
@@ -70,7 +70,7 @@ final class CertificateChain
                 return true;
             }
 
-            $anchor = @openssl_x509_read(self::derToPem($anchorDer));
+            $anchor = self::readCertificate(self::derToPem($anchorDer));
 
             if ($anchor !== false && openssl_x509_verify($last, $anchor) === 1) {
                 return true;
@@ -78,6 +78,25 @@ final class CertificateChain
         }
 
         return false;
+    }
+
+    /**
+     * Parse a PEM certificate, turning the warning OpenSSL raises on malformed input
+     * into a plain `false` return (an expected outcome here, not an error).
+     *
+     * @param string $pem
+     *
+     * @return \OpenSSLCertificate|false
+     */
+    private static function readCertificate(string $pem): \OpenSSLCertificate|false
+    {
+        set_error_handler(static fn (): bool => true, E_WARNING);
+
+        try {
+            return openssl_x509_read($pem);
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public static function derToPem(string $der): string

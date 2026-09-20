@@ -31,16 +31,40 @@ final class FileBlobCache implements BlobCacheInterface
     {
         $directory = dirname($this->path);
 
-        if (!is_dir($directory) && !@mkdir($directory, 0o775, true) && !is_dir($directory)) {
+        if (!is_dir($directory) && !self::quietly(static fn (): bool => mkdir($directory, 0o775, true)) && !is_dir($directory)) {
             throw new \RuntimeException("Cannot create cache directory {$directory}.");
         }
 
         $temporary = $this->path . '.' . bin2hex(random_bytes(4)) . '.tmp';
 
-        if (@file_put_contents($temporary, $jwt) === false || !@rename($temporary, $this->path)) {
-            @unlink($temporary);
+        if (
+            self::quietly(static fn (): int|false => file_put_contents($temporary, $jwt)) === false
+            || !self::quietly(fn (): bool => rename($temporary, $this->path))
+        ) {
+            self::quietly(static fn (): bool => unlink($temporary));
 
             throw new \RuntimeException("Cannot write metadata cache {$this->path}.");
+        }
+    }
+
+    /**
+     * Run a call whose PHP warning is expected and handled through its return value,
+     * without the `@` operator.
+     *
+     * @template T
+     *
+     * @param callable(): T $fn
+     *
+     * @return T
+     */
+    private static function quietly(callable $fn)
+    {
+        set_error_handler(static fn (): bool => true, E_WARNING);
+
+        try {
+            return $fn();
+        } finally {
+            restore_error_handler();
         }
     }
 }
