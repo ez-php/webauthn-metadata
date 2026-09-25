@@ -13,6 +13,11 @@ namespace EzPhp\WebauthnMetadata;
  */
 final class AttestationTrustVerifier
 {
+    /**
+     * AttestationTrustVerifier Constructor
+     *
+     * @param MdsClient $client
+     */
     public function __construct(
         private readonly MdsClient $client,
     ) {

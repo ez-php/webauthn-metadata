@@ -11,6 +11,11 @@ namespace EzPhp\WebauthnMetadata;
  */
 final class FileBlobCache implements BlobCacheInterface
 {
+    /**
+     * FileBlobCache Constructor
+     *
+     * @param string $path
+     */
     public function __construct(
         private readonly string $path,
     ) {

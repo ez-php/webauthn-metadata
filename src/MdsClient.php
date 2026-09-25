@@ -22,6 +22,14 @@ final class MdsClient
 {
     public const string DEFAULT_URL = 'https://mds3.fidoalliance.org/';
 
+    /**
+     * MdsClient Constructor
+     *
+     * @param BlobFetcherInterface $fetcher
+     * @param BlobCacheInterface   $cache
+     * @param MetadataBlobVerifier $verifier
+     * @param string               $url
+     */
     public function __construct(
         private readonly BlobFetcherInterface $fetcher,
         private readonly BlobCacheInterface $cache,

@@ -15,6 +15,11 @@ use EzPhp\WebauthnMetadata\Exception\BlobFetchException;
  */
 final class CurlBlobFetcher implements BlobFetcherInterface
 {
+    /**
+     * CurlBlobFetcher Constructor
+     *
+     * @param int $timeoutSeconds
+     */
     public function __construct(
         private readonly int $timeoutSeconds = 30,
     ) {

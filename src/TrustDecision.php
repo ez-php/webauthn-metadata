@@ -13,6 +13,13 @@ namespace EzPhp\WebauthnMetadata;
  */
 final readonly class TrustDecision
 {
+    /**
+     * TrustDecision Constructor
+     *
+     * @param bool               $trusted
+     * @param string             $reason
+     * @param MetadataEntry|null $entry
+     */
     public function __construct(
         public bool $trusted,
         public string $reason,
