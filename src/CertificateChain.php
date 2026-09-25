@@ -99,6 +99,9 @@ final class CertificateChain
         }
     }
 
+    /**
+     * Wrap a DER-encoded certificate in PEM armor.
+     */
     public static function derToPem(string $der): string
     {
         return "-----BEGIN CERTIFICATE-----\n" . chunk_split(base64_encode($der), 64, "\n") . "-----END CERTIFICATE-----\n";

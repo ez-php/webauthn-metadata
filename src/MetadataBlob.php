@@ -21,11 +21,17 @@ final readonly class MetadataBlob
     ) {
     }
 
+    /**
+     * Look up the metadata entry for an authenticator AAGUID, or null when unknown.
+     */
     public function findByAaguid(string $aaguid): ?MetadataEntry
     {
         return $this->entriesByAaguid[strtolower($aaguid)] ?? null;
     }
 
+    /**
+     * Number of entries in the BLOB.
+     */
     public function count(): int
     {
         return count($this->entriesByAaguid);

@@ -12,6 +12,9 @@ namespace EzPhp\WebauthnMetadata;
  */
 final class Aaguid
 {
+    /**
+     * Format 16 raw AAGUID bytes as a lower-case dashed UUID string.
+     */
     public static function fromBinary(string $bytes): string
     {
         if (strlen($bytes) !== 16) {

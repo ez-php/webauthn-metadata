@@ -20,6 +20,9 @@ final class CurlBlobFetcher implements BlobFetcherInterface
     ) {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function fetch(string $url): string
     {
         if (!str_starts_with($url, 'https://')) {

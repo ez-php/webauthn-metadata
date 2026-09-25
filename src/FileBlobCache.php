@@ -16,6 +16,9 @@ final class FileBlobCache implements BlobCacheInterface
     ) {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function get(): ?string
     {
         if (!is_file($this->path)) {
@@ -27,6 +30,9 @@ final class FileBlobCache implements BlobCacheInterface
         return is_string($contents) && $contents !== '' ? $contents : null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function put(string $jwt): void
     {
         $directory = dirname($this->path);
