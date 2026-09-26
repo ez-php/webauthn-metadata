@@ -1,6 +1,6 @@
 {
     "name": "ez-php/webauthn-metadata",
-    "version": "2.5.2",
+    "version": "2.5.3",
     "description": "FIDO MDS trust-anchor lookups for WebAuthn: metadata blob download, JWT verification, trust-anchor cache and attestation chain trust decisions",
     "type": "library",
     "license": "MIT",
