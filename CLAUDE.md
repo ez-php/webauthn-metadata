@@ -289,7 +289,18 @@ src/
   TrustDecision.php             — trusted flag, reason, matched entry
   Exception/                    — MetadataException (base), BlobFetchException, BlobVerificationException
 tests/
-  Support/                      — TestPki (generated certs), TestJwt (signed blobs), fakes for fetcher/cache
+  TestCase.php                  — Base PHPUnit test case (identical in every package)
+  AaguidTest.php                — 16 bytes → dashed UUID, wrong length rejected
+  CertificateChainTest.php      — leaf/intermediate/anchor chains, broken links, CA:TRUE rule, validity window, PEM/DER round trip
+  MetadataBlobVerifierTest.php  — ES256/RS256 blobs (via intermediate), wrong root, non-CA intermediate, tampering, nextUpdate, expired signer, malformed JWTs
+  MetadataBlobTest.php          — AAGUID lookup (case-insensitive), unknown AAGUID, count/metadata
+  MetadataEntryTest.php         — certified status trusted, first compromise status wins
+  TrustDecisionTest.php         — matched entry carried, null default
+  AttestationTrustVerifierTest.php — chain to a listed anchor trusted; unlisted AAGUID, revoked model, foreign chain untrusted
+  MdsClientTest.php             — download + verify + cache, cache reuse, corrupt/expired cache refetched, failures not masked by stale blobs, invalid downloads never cached
+  FileBlobCacheTest.php         — missing/empty file, round trip, unwritable location, failed rename leaves no temp file
+  CurlBlobFetcherTest.php       — https-only URL, unreachable host → BlobFetchException
+  Support/                      — TestPki (generated certs), TestJwt (signed blobs), FakeBlobFetcher, ArrayBlobCache
 ```
 
 ---
