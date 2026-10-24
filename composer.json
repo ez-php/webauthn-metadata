@@ -26,7 +26,7 @@
         "ez-php/webauthn": "Produces the attestation statements (x5c chain, AAGUID) this module evaluates against FIDO MDS"
     },
     "require-dev": {
-        "ez-php/docker": "^2.0",
+        "ez-php/docker": "^2.6.0",
         "phpunit/phpunit": "^13.0",
         "phpstan/phpstan": "^2.1",
         "friendsofphp/php-cs-fixer": "^3.94",
